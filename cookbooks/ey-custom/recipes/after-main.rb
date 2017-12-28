@@ -2,5 +2,5 @@
 #
 # include_recipe "my_cookbook::my_recipe"
 include_recipe "custom-resque"
-include_recipe "resque-scheduler"
+include_recipe "custom-resque_scheduler"
 include_recipe "nginx_ember_rails"
