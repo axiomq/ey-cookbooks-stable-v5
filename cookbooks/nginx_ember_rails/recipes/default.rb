@@ -5,7 +5,7 @@ require 'ostruct'
 #
 
 # variables
-app = node.engineyard.environment.apps.first
+app = node.dna['engineyard']['environment']['apps'].first
 vhost = app[:vhosts].first
 our_vhost = ::OpenStruct.new({
   name: app[:name],
@@ -15,7 +15,7 @@ our_vhost = ::OpenStruct.new({
 upstream_ports = params[:upstream_ports]
 nginx_http_port = 80
 nginx_https_port = 443
-ssh_username = node.engineyard.environment.ssh_username
+ssh_username = node.dna['engineyard']['environment']['ssh_username']
 
 directory '/data/thompson/shared/system/emberapp' do
   owner ssh_username
@@ -33,7 +33,7 @@ template '/data/nginx/servers/thompson.conf' do
     :vhost => our_vhost,
     :port => nginx_http_port,
     :upstream_ports => upstream_ports,
-    :framework_env => node.environment.framework_env
+    :framework_env => node.dna['environment']['framework_env']
   })
 end
 
@@ -47,7 +47,7 @@ template '/data/nginx/servers/thompson.ssl.conf' do
     :vhost => our_vhost,
     :port => nginx_https_port,
     :upstream_ports => upstream_ports,
-    :framework_env => node.environment.framework_env,
+    :framework_env => node.dna['environment']['framework_env'],
     :ssl => true
   })
 end
