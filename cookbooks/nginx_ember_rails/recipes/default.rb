@@ -33,7 +33,7 @@ template '/data/nginx/servers/thompson.conf' do
     :vhost => our_vhost,
     :port => nginx_http_port,
     :upstream_ports => upstream_ports,
-    :framework_env => node.environment.framework_env
+    :framework_env => node.engineyard.environment['framework_env']
   })
 end
 
@@ -47,7 +47,7 @@ template '/data/nginx/servers/thompson.ssl.conf' do
     :vhost => our_vhost,
     :port => nginx_https_port,
     :upstream_ports => upstream_ports,
-    :framework_env => node.environment.framework_env,
+    :framework_env => node.engineyard.environment['framework_env'],
     :ssl => true
   })
 end
